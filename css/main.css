@@ -1,0 +1,168 @@
+/* VARIABLES */
+
+:root{
+    /* COLORS */
+    --clr1: rgb(66, 60, 60);
+}
+
+/* FONTS */
+
+@font-face {
+    font-family: Eurofurence;
+    src: url(../fonts/FuzzyBubbles-Regular.ttf);
+}
+
+
+/* BASICS */
+
+*{
+    box-sizing: border-box;  
+}
+body{
+    margin: 0;
+}
+.app{
+    height: 100%;
+    width: 100%;
+}
+
+/* LAYOUT */
+
+.book-app{
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+/* HEADER , FOOTER */
+
+.app-header{
+    margin-bottom: 40px;
+    font-family: Eurofurence;
+}
+
+.app-footer{
+    margin-top: 40px;
+    font-family: Eurofurence;
+}
+
+.app-header , .app-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    background-color: var(--clr1);
+    color: beige;
+    height: 20vh;
+    padding: 20px;
+    text-align: center;
+}
+
+/* BOOK-CONTAINER */
+
+.book-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-items: center;
+}
+
+article{
+    padding: 0;
+    text-align: center;
+    background-color: rgb(156, 160, 196);
+    cursor: pointer;
+    border-radius: 10px;
+    width: 250px;
+}
+
+img{
+    width: 250px;
+    aspect-ratio: 3/4;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+article h2 , article h3{
+    color: rgb(66, 66, 25);
+   font-family: Eurofurence;
+   padding: 5px;
+}
+
+article h2{
+    font-size: xx-large;
+}
+
+/* MODAL */
+
+.page-opacity{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    left: 0%;
+    top: 0%;
+    opacity: 0.5;
+    background-color: black;
+}
+
+.book-details{
+    font-family: Eurofurence;
+    background-color: darkgray;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    width: 50vw;
+    height: 50vh;
+    border-radius: 10px;
+    padding: 20px;
+    overflow: auto;
+    text-align: center;
+}
+
+.book-details button{
+    font-family: Eurofurence;
+    border: 0px black;
+    font-size: large;
+    padding: 5px;
+    background-color: beige;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.book-details button:hover{
+    background-color: rgb(235, 222, 222);
+    padding: 8px;
+}
+
+.red{
+    color: rgb(175, 89, 89);
+}
+
+.green{
+    color: rgb(76, 161, 76);
+}
+
+/* FILTER */
+
+.book-filter{
+    font-family: Eurofurence;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.book-filter>*{
+    font-size: large;
+    padding: 10px;
+}
+
+.search{
+    font-family: Eurofurence;
+    border-radius: 10px;
+}
