@@ -15,7 +15,7 @@ export default {
         let currency = this.book.listPrice.currencyCode
         const formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: currency,
+            currency,
           })
           return formatter.format(this.book.listPrice.amount)
     }
