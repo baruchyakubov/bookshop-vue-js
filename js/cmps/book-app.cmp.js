@@ -2,53 +2,49 @@ import { bookService } from "../services/book-service.js"
 
 import bookFilter from './book-filter.cmp.js'
 import bookList from './book-list.cmp.js'
-import bookDetails from './book-details.cmp.js'
+
 
 export default {
     template: `
-    <section class="book-app">
-        <div v-if="selectedBook" class="page-opacity"></div>
+    <section class="book-app grid-container">
+        
         <book-filter @filter="filter"/>
-        <book-list 
+        <book-list v-if="books" 
             @selected="selectBook"  
             :books="booksToShow"/>
 
-        <book-details 
-            @close="selectedBook= null" 
-            v-if="selectedBook" 
-            :book="selectedBook"/>
+
+            <router-view ></router-view >
     </section>
     `,
-    data(){
+    data() {
         return {
-            books:[],
+            books: null,
             selectedBook: null,
-            filterBy: {name: '' , maxPrice: 186},
+            filterBy: { name: '', maxPrice: 186 },
         }
     },
-    created(){
-        this.books = bookService.query()
-        console.log(this.books);
+    created() {
+         bookService.query()
+                .then(books => {
+                    this.books = books
+                })
     },
-    computed:{
-        booksToShow(){
+    computed: {
+        booksToShow() {
             const regex = new RegExp(this.filterBy.name, 'i')
             console.log(this.filterBy.maxPrice);
             return this.books.filter(book => regex.test(book.title) &&
-             book.listPrice.amount <= this.filterBy.maxPrice) 
+                book.listPrice.amount <= this.filterBy.maxPrice)
         }
     },
-    methods:{
-        selectBook(book){
-            this.selectedBook = book
-        },
-        filter(filterBy){
+    methods: {
+        filter(filterBy) {
             this.filterBy = filterBy
         }
     },
-    components:{
+    components: {
         bookList,
-        bookDetails,
         bookFilter
     }
 }

@@ -1,6 +1,6 @@
 /* VARIABLES */
 
-:root{
+:root {
     /* COLORS */
     --clr1: rgb(66, 60, 60);
 }
@@ -15,20 +15,27 @@
 
 /* BASICS */
 
-*{
-    box-sizing: border-box;  
+* {
+    box-sizing: border-box;
 }
-body{
+
+body {
     margin: 0;
 }
-.app{
+
+.app {
     height: 100%;
     width: 100%;
 }
 
+a {
+    color: beige;
+    text-decoration-line: none;
+}
+
 /* LAYOUT */
 
-.book-app{
+.grid-container {
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
@@ -37,20 +44,29 @@ body{
 
 /* HEADER , FOOTER */
 
-.app-header{
+.app-header {
     margin-bottom: 40px;
     font-family: Eurofurence;
 }
 
-.app-footer{
-    margin-top: 40px;
-    font-family: Eurofurence;
+.app-header div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.app-header , .app-footer{
+.app-footer {
+    margin-top: 40px;
+    font-family: Eurofurence;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.app-header,
+.app-footer {
     font-size: xx-large;
     background-color: var(--clr1);
     color: beige;
@@ -59,16 +75,28 @@ body{
     text-align: center;
 }
 
+.navigation-bar {
+    display: flex;
+    gap: 20px;
+}
+
+.menu{
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+    display: none;
+}
+
 /* BOOK-CONTAINER */
 
-.book-list{
+.book-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     justify-items: center;
 }
 
-article{
+article {
     padding: 0;
     text-align: center;
     background-color: rgb(156, 160, 196);
@@ -77,26 +105,27 @@ article{
     width: 250px;
 }
 
-img{
+img {
     width: 250px;
     aspect-ratio: 3/4;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
 
-article h2 , article h3{
+article h2,
+article h3 {
     color: rgb(66, 66, 25);
-   font-family: Eurofurence;
-   padding: 5px;
+    font-family: Eurofurence;
+    padding: 5px;
 }
 
-article h2{
+article h2 {
     font-size: xx-large;
 }
 
 /* MODAL */
 
-.page-opacity{
+.page-opacity {
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -106,13 +135,13 @@ article h2{
     background-color: black;
 }
 
-.book-details{
+.book-details {
     font-family: Eurofurence;
     background-color: darkgray;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
     width: 50vw;
     height: 50vh;
     border-radius: 10px;
@@ -121,7 +150,7 @@ article h2{
     text-align: center;
 }
 
-.book-details button{
+.book-details button {
     font-family: Eurofurence;
     border: 0px black;
     font-size: large;
@@ -132,22 +161,40 @@ article h2{
     transition: 0.5s;
 }
 
-.book-details button:hover{
+.book-details button:hover {
     background-color: rgb(235, 222, 222);
     padding: 8px;
 }
 
-.red{
+.red {
     color: rgb(175, 89, 89);
 }
 
-.green{
+.green {
     color: rgb(76, 161, 76);
+}
+
+.review {
+    margin-bottom: 20px;
+    background-color: cadetblue;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.save {
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* FILTER */
 
-.book-filter{
+.book-filter {
     font-family: Eurofurence;
     display: flex;
     flex-wrap: wrap;
@@ -157,12 +204,50 @@ article h2{
     margin-bottom: 40px;
 }
 
-.book-filter>*{
+.book-filter>* {
     font-size: large;
     padding: 10px;
 }
 
-.search{
+.search {
     font-family: Eurofurence;
     border-radius: 10px;
+}
+
+/* USER-MSG */
+
+.user-msg {
+    position: fixed;
+    top: 40px;
+    right: 20px;
+    width: max-content;
+    background-color: rgb(208, 206, 139);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:863px){
+    .navigation-bar {
+        position: absolute;
+        flex-direction: column;
+        left: 50%;
+        top: 20%;
+        background-color: var(--clr1);
+        width: 100vw;
+        transform: translate(-50%);
+        display: none;
+    }
+
+    .opened{
+        display: flex;
+    }
+    .menu{
+        display: block;
+    }
+
+    .logo{
+        font-size: xx-large;
+    }
 }

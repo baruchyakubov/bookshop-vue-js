@@ -4,18 +4,14 @@ export default {
     props: ['books'],
     template: `
         <section class="book-list">
-            <article @click="showDetails(book)" v-for="book in books" :key="book.id">
-                <book-preview :book="book"/>
+            
+            <article v-for="book in books" :key="book.id">
+                <router-link :to="'/book/' + book.id">
+                    <book-preview :book="book"/>
+                </router-link>
             </article>
-           
         </section>
     `,
-      methods: {
-        showDetails(book){
-            this.$emit('selected', book)
-        }
-    },
-
     components: {
         bookPreview
     }

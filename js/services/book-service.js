@@ -1,14 +1,19 @@
-import { storageService } from "./storage-service.js";
+import { utilService } from "./storage-service.js";
+import { storageService } from './async-storage.service.js'
 
 const BOOKS_KEY = 'books'
 
+_createBooks()
 export const bookService = {
     _createBooks,
-    query
+    query,
+    get,
+    save,
+    remove
 }
 
 function _createBooks(){
-    let books = storageService.loadFromStorage(BOOKS_KEY)
+    let books = utilService.loadFromStorage(BOOKS_KEY)
     if(!books || !books.length){
         books = [
             {
@@ -31,7 +36,8 @@ function _createBooks(){
                 amount: 109,
                 currencyCode: "EUR",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "JYOJa2NpSCq",
@@ -53,7 +59,8 @@ function _createBooks(){
                 amount: 44,
                 currencyCode: "EUR",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "1y0Oqts35DQ",
@@ -75,7 +82,8 @@ function _createBooks(){
                 amount: 108,
                 currencyCode: "ILS",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "kSnfIJyikTP",
@@ -97,7 +105,8 @@ function _createBooks(){
                 amount: 30,
                 currencyCode: "EUR",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "f4iuVmbuKCC",
@@ -119,7 +128,8 @@ function _createBooks(){
                 amount: 19,
                 currencyCode: "USD",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "U2rfZO6oBZf",
@@ -141,7 +151,8 @@ function _createBooks(){
                 amount: 91,
                 currencyCode: "USD",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "xI0wrXaaAcq",
@@ -163,7 +174,8 @@ function _createBooks(){
                 amount: 90,
                 currencyCode: "USD",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "9laHCEdSpFy",
@@ -185,7 +197,8 @@ function _createBooks(){
                 amount: 176,
                 currencyCode: "EUR",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "nGhVwZvGCGp",
@@ -229,7 +242,8 @@ function _createBooks(){
                 amount: 145,
                 currencyCode: "EUR",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "bd7a76kARao",
@@ -251,7 +265,8 @@ function _createBooks(){
                 amount: 157,
                 currencyCode: "ILS",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "qKyG0vqeO3e",
@@ -273,7 +288,8 @@ function _createBooks(){
                 amount: 57,
                 currencyCode: "USD",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "2RvT48ZNInj",
@@ -295,7 +311,8 @@ function _createBooks(){
                 amount: 167,
                 currencyCode: "ILS",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "5z2s9pDXAYj",
@@ -317,7 +334,8 @@ function _createBooks(){
                 amount: 150,
                 currencyCode: "USD",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "zBZu5cDEWha",
@@ -339,7 +357,8 @@ function _createBooks(){
                 amount: 58,
                 currencyCode: "ILS",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "aOI7tQuPZ2f",
@@ -361,7 +380,8 @@ function _createBooks(){
                 amount: 78,
                 currencyCode: "USD",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "WBooB82Uvwu",
@@ -383,7 +403,8 @@ function _createBooks(){
                 amount: 118,
                 currencyCode: "ILS",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "xm1z5bbZjlS",
@@ -405,7 +426,8 @@ function _createBooks(){
                 amount: 60,
                 currencyCode: "EUR",
                 isOnSale: false
-              }
+              },
+              reviews: []
             },
             {
               id: "u3j6QIKLlJb",
@@ -427,7 +449,8 @@ function _createBooks(){
                 amount: 110,
                 currencyCode: "USD",
                 isOnSale: true
-              }
+              },
+              reviews: []
             },
             {
               id: "vxYYYdVlEH3",
@@ -449,14 +472,31 @@ function _createBooks(){
                 amount: 186,
                 currencyCode: "ILS",
                 isOnSale: true
-              }
+              },
+              reviews: []
             }
           ]
-          storageService.saveToStorage(BOOKS_KEY , books)
+          utilService.saveToStorage(BOOKS_KEY , books)
     }
     return books
 }
 
 function query(){
-    return storageService.loadFromStorage(BOOKS_KEY)
+    return storageService.query(BOOKS_KEY)
+}
+
+function get(bookId){
+  return storageService.get(BOOKS_KEY, bookId)
+}
+
+function save(book) {
+  if(book.id){
+      return storageService.put(BOOKS_KEY, book)
+  } else {
+      return storageService.post(BOOKS_KEY, book)
+  }
+}
+
+function remove(bookId) {
+  return storageService.remove(BOOKS_KEY, bookId)
 }
